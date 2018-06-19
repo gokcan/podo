@@ -58,3 +58,4 @@ android/app/libs
 android/keystores/debug.keystore
 
 package-lock.json
+config.js
