@@ -68,7 +68,7 @@ export default class HomePage extends Component<Props> {
 	onPress = (item) => {
 		this.props.navigation.navigate('FormPreview', {
 			title: item.title,
-			_title: item._title
+			id: item.id
 		});
 	};
 
