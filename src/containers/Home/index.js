@@ -6,7 +6,7 @@ import { fetchData } from '../../actions/FetchTemplate';
 const mapStateToProps = (state: Object) => getTemplateSelector(state);
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  fetchData: (id) => dispatch(fetchData(id)),
+  fetchData: (page) => dispatch(fetchData(page)),
 });
 
 export default connect(

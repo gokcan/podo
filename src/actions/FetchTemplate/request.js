@@ -1,10 +1,11 @@
 import { FETCH_TEMPLATE } from '../../constants/action-types/template-fetch';
 
-export const fetchTemplate = () => (
+export const fetchTemplate = (page) => (
   {
     type: FETCH_TEMPLATE,
     payload: {
       isLoading: true,
+      page: page,
     },
   }
 );

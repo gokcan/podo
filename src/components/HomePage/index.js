@@ -17,7 +17,7 @@ import styles from './styles';
 type Props = {
 	error: boolean,
 	isLoading: boolean,
-	templateInfo: Object,
+	templateInfo: Array,
 	fetchData: Function
 };
 
@@ -31,7 +31,7 @@ export default class HomePage extends Component<Props> {
 	componentWillMount() {
 		const { fetchData } = this.props;
 		StatusBar.setHidden(true);
-		fetchData();
+		fetchData(0);
 	}
 
 	getErrorMessage() {
@@ -72,13 +72,16 @@ export default class HomePage extends Component<Props> {
 		});
 	};
 
+	tryFetch = (page, isLoading, fetchData) => {
+		if (!isLoading) {
+			fetchData(page+1);
+		}
+	}
 	render() {
-		const { isLoading, error, fetchData, templateInfo } = this.props;
+		const { isLoading, error, fetchData, templateInfo, page } = this.props;
 		const header = 'Jotform Form Templates';
-
 		return (
 			<View style={styles.container}>
-				{isLoading ? <ActivityIndicator /> : null}
 				{error ? this.getErrorMessage() : null}
 				<View style={{ flex: 0.07 }}>
 					<Text
@@ -94,13 +97,16 @@ export default class HomePage extends Component<Props> {
 					</Text>
 				</View>
 				<FlatList
-					data={templateInfo.data}
+					data={templateInfo}
 					ItemSeparatorComponent={this.getItemSeparator}
 					showsHorizontalScrollIndicator={false}
 					showsVerticalScrollIndicator={false}
 					keyExtractor={(item, index) => item.id}
 					renderItem={({ item }) => this.getRowItem(item)}
+					onEndReachedThreshold={0.1}
+					onEndReached={() => this.tryFetch(page, isLoading, fetchData) }
 				/>
+				{isLoading ? <ActivityIndicator /> : null}
 			</View>
 		);
 	}

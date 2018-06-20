@@ -3,13 +3,11 @@ import { fetchTemplateError } from './error';
 import { fetchTemplate } from './request';
 import { fetchTemplateSuccess } from './success';
 
-export const fetchData = () => (
+export const fetchData = (page) => (
   (dispatch: Function) => {
-    dispatch(fetchTemplate());
-    return fetchTemplateData()
+    dispatch(fetchTemplate(page));
+    return fetchTemplateData(page)
       .then((templateInfo) => dispatch(fetchTemplateSuccess(templateInfo)))
       .catch(() => dispatch(fetchTemplateError()));
   }
 );
-
-
