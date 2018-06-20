@@ -50,10 +50,30 @@ export default class HomePage extends Component<Props> {
 		);
 	}
 
+	getStickyHeader() {
+		const title = 'Jotform Form Templates';
+		return (
+			<View style={{ flex: 1, backgroundColor: '#008891' }}>
+				<Text
+					style={{
+						color: '#f7f7f7',
+						fontSize: 30,
+						padding: 8,
+						textAlign: 'center',
+						fontWeight: 'bold',
+						fontFamily: 'Futura'
+					}}
+				>
+					{title}
+				</Text>
+			</View>
+		);
+	}
+
 	getRowItem = (item) => {
 		const uri = 'https:' + item.screenshot;
 		return (
-			<TouchableOpacity onPress={() => this.onPress(item)}>
+			<TouchableOpacity activeOpacity= {0.9} onPress={() => this.onPress(item)}>
 				<View style={{ flex: 1, flexDirection: 'row', margin: 4 }}>
 					<Image style={{ width: 140, height: 164 }} source={{ uri }} />
 					<View style={{ flex: 1, flexDirection: 'column', marginLeft: 4 }}>
@@ -74,39 +94,31 @@ export default class HomePage extends Component<Props> {
 
 	tryFetch = (page, isLoading, fetchData) => {
 		if (!isLoading) {
-			fetchData(page+1);
+			fetchData(page + 1);
 		}
-	}
+	};
 	render() {
 		const { isLoading, error, fetchData, templateInfo, page } = this.props;
-		const header = 'Jotform Form Templates';
 		return (
 			<View style={styles.container}>
 				{error ? this.getErrorMessage() : null}
-				<View style={{ flex: 0.07 }}>
-					<Text
-						style={{
-							color: '#f7f7f7',
-							fontSize: 24,
-							textAlign: 'center',
-							fontWeight: 'bold',
-							fontFamily: 'Futura'
-						}}
-					>
-						{header}
-					</Text>
-				</View>
 				<FlatList
 					data={templateInfo}
 					ItemSeparatorComponent={this.getItemSeparator}
+					ListHeaderComponent={this.getStickyHeader}
+					stickyHeaderIndices={[0]}
 					showsHorizontalScrollIndicator={false}
 					showsVerticalScrollIndicator={false}
 					keyExtractor={(item, index) => item.id}
 					renderItem={({ item }) => this.getRowItem(item)}
 					onEndReachedThreshold={0.1}
-					onEndReached={() => this.tryFetch(page, isLoading, fetchData) }
+					onEndReached={() => this.tryFetch(page, isLoading, fetchData)}
 				/>
-				{isLoading ? <ActivityIndicator /> : null}
+				{isLoading ? (
+					<View style={{ flex: 1 }}>
+						<ActivityIndicator color="#f7f7f7" />
+					</View>
+				) : null}
 			</View>
 		);
 	}
