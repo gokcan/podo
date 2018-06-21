@@ -6,22 +6,18 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#283149',
-  },
-  errorText: {
-    textAlign: 'center',
-    color: 'red',
-    fontWeight: 'bold',
+    backgroundColor: '#0f3057',
   },
   templateInfoText: {
-    color: '#dbedf3',
+    color: '#e7e7de',
+    fontSize: 16,
     padding: 4,
   },
   titleText: {
-    color: '#ffb400',
-    backgroundColor: '#374955',
+    color: '#dbe2ef',
+    backgroundColor: '#00587a',
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 20,
   },
 });

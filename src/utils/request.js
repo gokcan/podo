@@ -20,6 +20,4 @@ const request = (url, options) =>
     .then(checkStatus)
     .then(parseJSON);
 
-
 export default request;
-
