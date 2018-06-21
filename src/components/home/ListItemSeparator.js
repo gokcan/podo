@@ -2,7 +2,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-const ListItemSeperator = () => (
+const ListItemSeparator = () => (
   <View
     style={{
       height: 1,
@@ -12,4 +12,4 @@ const ListItemSeperator = () => (
   />
 );
 
-export default ListItemSeperator;
+export default ListItemSeparator;
