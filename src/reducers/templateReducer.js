@@ -17,11 +17,15 @@ const templateReducer = (state: Object = initialState, action: Object) => {
   switch (action.type) {
     case FETCH_TEMPLATE_SUCCESS: {
       const { templateInfo } = action.payload;
+      const templates = templateInfo.filter(template =>
+        !state.templateInfo.map(o =>
+          o.id).includes(template.id));
+
       return {
         ...state,
         isLoading: false,
         error: false,
-        templateInfo: [...state.templateInfo, ...templateInfo],
+        templateInfo: [...state.templateInfo, ...templates],
       };
     }
     case FETCH_TEMPLATE: {
