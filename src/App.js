@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation';
 import configureStore from './store/configureStore';
 import HomeContainer from './containers/home/Home';
 import FormPreviewScreen from './components/form-preview/FormPreviewScreen';
+import NetworkEventHandler from './init/NetworkEventHandler';
 
 const store = configureStore({});
 
@@ -19,7 +20,9 @@ const AppStackNavigator = createStackNavigator({
 
 const App = () => (
   <Provider store={store}>
-    <AppStackNavigator />
+    <NetworkEventHandler>
+      <AppStackNavigator />
+    </NetworkEventHandler>
   </Provider>
 );
 
