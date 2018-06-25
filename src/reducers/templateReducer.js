@@ -17,9 +17,8 @@ const templateReducer = (state: Object = initialState, action: Object) => {
   switch (action.type) {
     case FETCH_TEMPLATE_SUCCESS: {
       const { templateInfo } = action.payload;
-      const templates = templateInfo.filter(template =>
-        !state.templateInfo.map(o =>
-          o.id).includes(template.id));
+      const templates = templateInfo.filter(template => !state.templateInfo.map(o => o.id)
+        .includes(template.id));
 
       return {
         ...state,
@@ -29,11 +28,12 @@ const templateReducer = (state: Object = initialState, action: Object) => {
       };
     }
     case FETCH_TEMPLATE: {
+      const { page } = action.payload;
       return {
         ...state,
         isLoading: true,
         error: false,
-        page: action.payload.page,
+        page,
       };
     }
     case FETCH_TEMPLATE_ERROR: {

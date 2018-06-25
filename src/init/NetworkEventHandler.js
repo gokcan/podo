@@ -1,13 +1,6 @@
 /* @flow */
 import React, { PureComponent } from 'react';
-import { NetInfo, View, StyleSheet } from 'react-native';
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: 'stretch',
-  },
-});
+import { NetInfo } from 'react-native';
 
 type Props = {
   children: React.Node,
@@ -27,10 +20,13 @@ export default class NetworkEventHandler extends PureComponent<Props> {
    */
   handleChange = (conn) => {
     const isConnected = conn.type !== 'none';
-    console.warn(`Connection status: ${isConnected}`);
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(`Connection status: ${isConnected}`);
+    }
   };
 
   render() {
-    return <View style={styles.wrapper}>{this.props.children}</View>;
+    const { children } = this.props;
+    return children;
   }
 }

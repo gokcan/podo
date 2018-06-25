@@ -15,9 +15,8 @@ const parseJSON = (response) => {
   return response.json();
 };
 
-const request = (url, options) =>
-  fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON);
+const request = (url, options) => fetch(url, options)
+  .then(checkStatus)
+  .then(parseJSON);
 
 export default request;

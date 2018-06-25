@@ -35,7 +35,8 @@ export default class HomeScreen extends Component<Props> {
   }
 
   onSelect = (item) => {
-    this.props.navigation.navigate('FormPreview', {
+    const { navigation } = this.props;
+    navigation.navigate('FormPreview', {
       title: item.title,
       id: item.id,
     });
@@ -43,7 +44,7 @@ export default class HomeScreen extends Component<Props> {
 
   tryFetch = (page, isLoading, fetchData) => {
     if (!isLoading) {
-      fetchData(page + 1);
+      fetchData(page);
     }
   };
 
@@ -62,12 +63,17 @@ export default class HomeScreen extends Component<Props> {
           stickyHeaderIndices={[0]}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          keyExtractor={item => item.id}
-          renderItem={({ item, index }) =>
-            <FormListItem index={index} item={item} onSelect={this.onSelect} {...item} />
-          }
-          onEndReachedThreshold={0.8}
-          onEndReached={() => this.tryFetch(page, isLoading, fetchData)}
+          keyExtractor={item => `${item.id}${item.title}`}
+          renderItem={({ item, index }) => (
+            <FormListItem
+              index={index}
+              item={item}
+              onSelect={this.onSelect}
+              {...item}
+            />
+          )}
+          onEndReachedThreshold={0.9}
+          onEndReached={() => this.tryFetch(page + 1, isLoading, fetchData)}
         />
         {isLoading ? (
           <View style={{ flex: 1 }}>
