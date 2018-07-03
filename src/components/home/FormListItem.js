@@ -25,6 +25,7 @@ export default class FormListItem extends PureComponent<Props> {
     return (
       <TouchableOpacity activeOpacity={0.9} onPress={this.handleSelect}>
         <View style={{ flex: 1, flexDirection: 'row', margin: 4 }}>
+          <Image style={{ width: 140, height: 164 }} source={{ uri, cache: 'force-cache' }} />
           <View style={{ flex: 1, flexDirection: 'column', marginLeft: 4 }}>
             <Text style={styles.titleText}>
               {title}
